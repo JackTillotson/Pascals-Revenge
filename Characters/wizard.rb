@@ -26,4 +26,8 @@ class Wizard < Character
     stat_bonus(:constitution) + 0
   end
 
+  def fireball
+
+  end
+
 end

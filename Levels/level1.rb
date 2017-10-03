@@ -150,4 +150,8 @@ puts "You ignore Pascal and open the ancient wooden door that leads into the cry
 .
 Good luck Hero.\n"
 
-next_scenario
+10.times do
+  next_scenario
+end
+
+puts 'STAGE 1 COMPLETE'
