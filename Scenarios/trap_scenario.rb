@@ -1,6 +1,6 @@
 def trap_scenario
-  traps = [:spike_trap, :dart_trap]
-  num = rand(0..1)
+  traps = [:spike_trap, :dart_trap, :mind_flayer_trap]
+  num = rand(0..2)
   send(traps[num])
 end
 
@@ -91,7 +91,7 @@ def mind_flayer_action
     choices.choice 'Run out of the room and take minor damage!', -> {World.champion.lose_health(2)}
     choices.choice 'Attempt to mind battle the mind flayer!', -> {if World.dice.roll_d20 + 2 > (World.dice.roll_d20 + World.champion.will_save)
                                                                     damage = World.dice.roll_d6
-                                                                    puts "The mind flayer's superior power overcomes you dealing #{damage}!
+                                                                    puts "The mind flayer's superior power overcomes you dealing #{damage} damage!
 You try to stagger out of the room before your final defeat!"
                                                                     World.champion.lose_health(damage)
                                                                     if World.champion.health < 1
@@ -99,7 +99,7 @@ You try to stagger out of the room before your final defeat!"
 GAME OVER.')
                                                                     end
                                                                   else
-                                                                    puts 'You overcomes the power of the mind flayer and mentally tea bag him for good measure.'
+                                                                    puts 'You overcome the power of the mind flayer and mentally tea bag him for good measure.'
                                                                   end}
   end
 end
@@ -112,6 +112,6 @@ It's the image of a mind flayer! Your brain starts to hurt immensely from his ps
 end
 
 def mind_flayer_outro
-  puts 'You saunter out of the room post mind battle victory. No one can stop you! Or so you think.'
+  puts 'You exit the mirrored room wondering what horrors await you next.'
 end
 # MIND FLAYER TRAP ------------------- MIND FLAYER TRAP

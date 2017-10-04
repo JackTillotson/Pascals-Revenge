@@ -53,10 +53,10 @@ def gear_to_s(gear)
 end
 
 def next_scenario
-  scenarios = [:fight_scenario, :fight_scenario]#, :puzzle_scenario, :trap_scenario, :trap_scenario]
-  send(scenarios[rand(0..1)])
+  scenarios = [:fight_scenario, :fight_scenario, :trap_scenario, :trap_scenario]#, :puzzle_scenario]
+  send(scenarios[rand(0..3)])
   World.prompt.select('What will you do next?') do |choices|
     choices.choice 'Move on.'
-    choices.choice 'Drink a potion.', -> {World.champion.use_potion}
+    choices.choice "Drink a potion. Current Health: #{World.champion.health}", -> {World.champion.use_potion}
   end
 end

@@ -159,23 +159,4 @@ class Character
     @attack_nums = a_num
   end
 
-  def hit_text(damage)
-    text = ["You swing your #{gear_to_s(weapon)} at the monster cutting deep into its flesh dealing #{damage} damage!",
-            "You decide to go old school and holstering your #{gear_to_s(weapon)}, you grab the monster and perform a perfect suplex doing #{damage} damage!",
-            "You mercilessly beat the monster with your fists dealing #{damage} damage!",
-            "You feint low and instead bring your #{gear_to_s(weapon)} high bringing it down on the monster's head doing #{damage} damage to the creature!",
-            "You unbalance the monster with a well placed kick and slice across dealing #{damage} damage!",
-            "With a great show of strength you roundhouse kick the monster to the ground and bring down your #{gear_to_s(weapon)} on top of it doing #{damage} damage!"]
-    num = rand(0..5)
-    text[num]
-  end
-
-  def miss_text
-    text = ["You swing your #{gear_to_s(weapon)} but it narrowly misses the monster.",
-            "You barely miss the monster.",
-            "The monster deflects your blow."]
-    num = rand(0..2)
-    text[num]
-  end
-
 end

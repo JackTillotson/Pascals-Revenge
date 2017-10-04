@@ -115,9 +115,9 @@ World.prompt.select("Well what about your weapon? What have you got hidden away 
     weapon.choice 'Shortswords', -> {World.champion.weapon_up(:shortswords, 6, 2, 0)}
     weapon.choice 'A Really Big Stick', -> {World.champion.weapon_up(:really_big_stick, 10, 1, 2)}
   elsif World.champion._class == :wizard
-    weapon.choice 'A Wizard Staff', -> {World.champion.weapon_up(:wizard_staff, 6, 0)}
-    weapon.choice 'A Stupid Little Wand', -> {World.champion.weapon_up(:stupid_little_wand, 3, 1)}
-    weapon.choice 'The Lunch My Mom Packed Me.', -> {World.champion.weapon_up(:lunch, 1, 2)}
+    weapon.choice 'A Wizard Staff', -> {World.champion.weapon_up(:wizard_staff, 6, 1, 0)}
+    weapon.choice 'A Stupid Little Wand', -> {World.champion.weapon_up(:stupid_little_wand, 3, 1, 1)}
+    weapon.choice 'The Lunch My Mom Packed Me.', -> {World.champion.weapon_up(:lunch, 1, 1, 2)}
   elsif World.champion._class == :rogue
     weapon.choice 'Daggers', -> {World.champion.weapon_up(:daggers, 3, 3, 0)}
     weapon.choice 'Hand Axes', -> {World.champion.weapon_up(:hand_axes, 5, 2, 0)}
