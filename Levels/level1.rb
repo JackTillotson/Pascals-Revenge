@@ -154,4 +154,58 @@ Good luck Hero.\n"
   next_scenario
 end
 
-puts 'STAGE 1 COMPLETE'
+puts "\n\nSTAGE 1 COMPLETE\n\n"
+
+puts "Pascal: Well done #{World.champion.name}! Well done! You have made it further than any before you!
+I can almost feel the power flowing through me once again! Hahaha!
+#{World.champion.name}: What are you talking about\n?
+Pascal: Oh nothing! I just meant power as in uhhhh treasure ya know! Like how we will be rich after this!\n"
+World.prompt.select('How do you respond?') do |choices|
+  choices.choice "Yeah right! I'm not sharing any treasure with you!", -> {puts "Pascal: After all we've been through!? What a jerk..."}
+  choices.choice "Sure whatever you say."
+end
+
+World.champion.add_potions(3)
+puts "\nYou reach the end of the tunnel you were walking through as a giant metal door is blocking your way.
+Before the door is the skeleton of what looks like an adventurer before you.
+You find 3 more potions on the decaying body.\n"
+
+World.prompt.select('What do you say to Pascal?') do |choices|
+  choices.choice "In a mocking tone: 'You made it further than any before you, look at me, I'm a stupid bug.'",
+                 -> {puts "Pascal: Hey no need to make fun! Just an honest mistake! I forgot about this guy!"}
+  choices.choice "Hey moron, looks like someone else did make it this far...",
+                 -> {World.prompt.select( "Pascal: Oh woops... Forgot about him. If I remember correctly I liked him much more than you.") do |choices|
+                   choices.choice 'Ignore Pascal.'
+                   choices.choice 'Spit a loogie on Pascal',
+                                  -> {if World.dice.roll_d20 == 20
+                                        puts "You spit a loogie at Pascal covering him in disgusting phlegm.
+Pascal: OH COME ON! NASTY!"
+                                      else
+                                        puts "You spit a loogie at Pascal but he easily buzzes away and instead it lands on your shoulder... gross.
+Pascal: Haha... doofus."
+                                      end}
+                 end}
+  choices.choice "Nothing."
+end
+
+puts "\nYou attempt to open the door but it seems to be stuck. You try again but the door won't budge.
+You ask Pascal, 'Well what do we do now?'
+Pascal: Ummm... Push harder?
+Suddenly a booming voice shouts:"
+solved = false
+while solved == false
+  puts "'WHO IS THE COOLEST PERSON IN THE WORLD?! ANSWER INCORRECTLY AND I WILL DESTROY YOU!... SLOWLY!'"
+  word = World.prompt.ask('Who is it?', required: true)
+  if word.downcase == 'jack'
+    solved = true
+    puts "You hear the voice shout again: 'OBVIOUSLY!'"
+  else
+    World.champion.lose_health(1)
+    puts "WRONG!
+You lose 1 health, you are now at #{World.champion.health} health."
+  end
+end
+
+puts "The door opens and behind it seems to be more endless crypt...
+#{World.champion.name}: This just looks like more of the same! When will we get to the end!?
+Pascal: The crypt is not done with us just yet... Though we are getting closer, I can feel it."

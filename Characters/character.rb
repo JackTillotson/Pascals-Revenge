@@ -70,6 +70,10 @@ class Character
     @potions
   end
 
+  def add_potions(potions)
+    @potions += potions
+  end
+
   def use_potion
     if @potions > 0
       @potions -= 1
