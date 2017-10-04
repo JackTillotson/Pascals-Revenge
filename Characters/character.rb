@@ -77,7 +77,14 @@ class Character
   def use_potion
     if @potions > 0
       @potions -= 1
-      gain_health(World.dice.roll_d8)
+      num = gain_health(World.dice.roll_d8)
+      if num > 5
+        puts "The potion glistens with the tears of angels as it slides smoothly down your throat. You regain #{num} health."
+      elsif num > 3
+        puts "The potion seems to have been decently brewed. You regain #{num} health"
+      else
+        puts "The potion seemed to be diluted with a little troll piss... You only regain #{num} health"
+      end
     else
       puts 'You are out of potions.'
     end

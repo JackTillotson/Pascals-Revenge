@@ -53,9 +53,9 @@ def wizard_fight
         actions.choice 'Fireball', -> {if World.champion.attack > @monster.armor_value
                                          damage = World.champion.fireball
                                          @monster.lose_health(damage)
-                                         puts World.champion.fireball_hit_text(damage)
+                                         puts fireball_hit_text(damage)
                                        else
-                                         puts World.champion.fireball_miss_text
+                                         puts fireball_miss_text
                                        end}
         #TODO: How to re-ask this question if they are at max armor without skipping a turn?
         actions.choice "Magic Shield: Lasts three turns, Max one stack. Turns left: #{@shield_count}.", -> {if @player_armor >= max_armor
@@ -68,20 +68,20 @@ def wizard_fight
         actions.choice 'Lightning Bolt', -> {if World.champion.attack > @monster.armor_value
                                                damage = World.champion.lightning_bolt
                                                @monster.lose_health(damage)
-                                               puts World.champion.lightning_bolt_hit_text(damage)
+                                               puts lightning_bolt_hit_text(damage)
                                              else
-                                               puts World.champion.lightning_bolt_miss_text
+                                               puts lightning_bolt_miss_text
                                              end}
         actions.choice 'Ice Blast', -> {if World.champion.attack > @monster.armor_value
                                           damage = World.champion.ice_blast
                                           @monster.lose_health(damage)
-                                          puts World.champion.ice_blast_hit_text(damage)
+                                          puts ice_blast_hit_text(damage)
                                           if rand(0..1) == 0
                                             @frozen = true
                                             puts "The #{@monster.name} was frozen for a turn!"
                                           end
                                         else
-                                          puts World.champion.ice_blast_miss_text
+                                          puts ice_blast_miss_text
                                         end}
         actions.choice "Drink Potion. Current Health: #{World.champion.health}. Potions Remaining: #{World.champion.potions}", -> {World.champion.use_potion}
       end
@@ -122,7 +122,13 @@ def regular_fight
                                        puts champion_hit_text(damage)
                                      else
                                        puts champion_miss_text
-                                     end}
+                                      end}
+        actions.choice "Give the #{@monster.name} a 'hug'. Monsters need love too.",
+                       -> {if World.dice.roll_d3 == 1
+                             damage = @monster.do_damage / 2
+                             World.champion.lose_health(damage)
+                             puts "The #{@monster.name} does not trust your pure intentions and instead punches you straight in the nuts for #{damage} damage!"
+                           end}
         actions.choice "Drink Potion. Current Health: #{World.champion.health}. Potions Remaining: #{World.champion.potions}", -> {World.champion.use_potion}
       end
       turn = 'monster'

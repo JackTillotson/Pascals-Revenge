@@ -6,26 +6,16 @@ require_relative '../Characters/rogue'
 puts "You arrive at the border of Dunathal, tired and hungry from your journey.
 You see a small bug floating annoyingly close to you... Almost like it's watching you.\n\n"
 
-bug_action = World.prompt.select('What do you do?') do |stuff|
-  stuff.choice 'Swat it', 1
-  stuff.choice 'Attempt to eat it', 2
-  stuff.choice 'Ignore it', 3
-  stuff.choice 'Talk to it', 4
-end
-
-if bug_action == 1
-  puts 'Please stop trying to hit me!'
-elsif bug_action == 2
-  puts 'Who does that you weirdo?'
-elsif bug_action == 3
-  puts 'Excuse me!'
-elsif bug_action == 4
-  puts "You: Hello Mr. Bug.\nBug: Oh an adventurer with manners! How pleasant, I think I'll
-enjoy traveling with you!"
+World.prompt.select('What do you do?') do |stuff|
+  stuff.choice 'Swat it', -> {puts 'Please stop trying to hit me!'}
+  stuff.choice 'Attempt to eat it', -> {puts 'Who does that you weirdo?'}
+  stuff.choice 'Ignore it', -> {puts 'Excuse me!'}
+  stuff.choice 'Talk to it', -> {puts "You: Hello Mr. Bug.\nBug: Oh an adventurer with manners! How pleasant, I think I'll
+enjoy traveling with you!"}
 end
 
 puts "\n\nI am Pascal!\nWelcome to the land of Dunathal Adventurer!
-So you seek the treasure of the great Crypt Lord Balanar?
+So you seek the treasure of the great Lich Balanar?
 Well of course... Why else would you approach certain death?\n
 Just kidding! You'll be fine! Promise!
 But enough of that! What's your name? Not that it really matters... They never live long enough for me to use it.
@@ -53,9 +43,9 @@ Well if I wasn't a bug I would rip your limbs off and turn you into a mindless z
 I mean umm... That's cool, I like #{_class}s as much as the next guy."
 
 World.prompt.select('Shall we move on?') do |stuff|
-  stuff.choice "Hell no we ain't moving on!", -> {abort("Pascal: Fine you panzy!\nGAME OVER.")}
   stuff.choice 'I suppose so...'
   stuff.choice "LET'S DO IT!"
+  stuff.choice "Hell no we ain't moving on!", -> {abort("Pascal: Fine you panzy!\nGAME OVER.")}
 end
 
 puts "\n\nyou make your way towards the ancient crypts. Every step leads you further into a darkening landscape more
@@ -70,7 +60,7 @@ Now can we continue or do you have more insults for me?") do |q|
     q.choice "Fine, let's go.", -> {puts('Pascal: Thank you!')}
     q.choice "You expect me to believe you are here to help me get rich? Tell me the truth!",
              -> {World.prompt.select("Pascal: What are you gonna do if I don't #{World.champion.name}?...") do |stuff|
-      stuff.choice 'Attempt to squish Pascal.', -> {if World.dice.roll_d20 == 20
+      stuff.choice 'Attempt to squish Pascal.', -> {if World.dice.roll_d(100) == 100
                                                       abort('You squish Pascal, feeling his guts ooze out his little
  bug body. Then you feel something else... The ground starts to shake. All of a sudden the land around you explodes.
  You feel shrapnel shredding your body and the sting of icy cold begins to gnaw at your heart. Your vision darkens and
@@ -133,7 +123,14 @@ You descend the stairs. The air becomes foul and damp as you make your way down.
 Pascal: The crypts are ever changing and the monsters and traps that exist in these halls cannot be predicted.
 Keep moving forward and eventually you will reach the tomb of Balanar where great treasure and power awaits you.
 
-You enter a small room lined with lichen and small plants growing in the cracks of the old stone.
+Remember this! The crypt is cursed by dark magic and is always shifting, it's never the same twice!
+I will be just as lost as you are once we enter."
+
+World.prompt.select 'What do you do?' do |choices|
+  choices.choice 'Continue.'
+end
+
+"You enter a small room lined with lichen and small plants growing in the cracks of the old stone.
 On the floor there is a brown leather pack covered in cobwebs.
 Pascal flies down and takes a peek inside.
 Pascal: Oh goody! Health potions! Take these with you to aid you in the crypts.
@@ -142,13 +139,13 @@ World.prompt.select('Pascal: How many potions do you have now?') do |choices|
   choices.choice 'This makes 3.', -> {puts 'Pascal: You idiot! You came here with no potions?!'}
   choices.choice 'Enough.', -> {puts "Pascal: Good, you'll need them."}
 end
-puts "You ignore Pascal and open the ancient wooden door that leads into the crypt.
+puts "\nYou ignore Pascal and open the ancient wooden door that leads into the crypt.
 .
 .
 .
 .
 .
-Good luck Hero.\n"
+Good luck Hero.\n\n"
 
 10.times do
   next_scenario

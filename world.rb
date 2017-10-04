@@ -1,6 +1,6 @@
 require 'tty/prompt'
 require_relative 'Scenarios/fight_scenario'
-require_relative 'Scenarios/puzzle_scenario'
+require_relative 'Scenarios/Puzzle Scenarios/puzzle_scenario'
 require_relative 'Scenarios/trap_scenario'
 
 module World
@@ -53,10 +53,10 @@ def gear_to_s(gear)
 end
 
 def next_scenario
-  scenarios = [:fight_scenario, :fight_scenario, :trap_scenario, :trap_scenario]#, :puzzle_scenario]
-  send(scenarios[rand(0..3)])
+  scenarios = [:fight_scenario, :fight_scenario, :trap_scenario, :trap_scenario, :puzzle_scenario]
+  send(scenarios[rand(0..4)])
   World.prompt.select("\nWhat will you do next?") do |choices|
     choices.choice 'Move on.'
-    choices.choice "Drink a potion. Current Health: #{World.champion.health}", -> {World.champion.use_potion}
+    choices.choice "Drink a potion. Current Health: #{World.champion.health}. Potions Remaining: #{World.champion.potions}", -> {World.champion.use_potion}
   end
 end
