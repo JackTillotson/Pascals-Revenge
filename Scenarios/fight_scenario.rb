@@ -1,14 +1,10 @@
 require_relative '../world'
-require_relative '../monsters'
+require_relative '../Monsters/monsters'
+require_relative '../Monsters/minotaur'
+require_relative '../Monsters/skeleton'
+require_relative '../Monsters/goblin'
+require_relative '../Monsters/mutated_rat_person'
 require_relative '../Characters/character'
-#TODO: order of fight:
-# Intro fight text
-    # e.g. "You make your down a disgusting slimy tunnel and enter a room lined with foreign paintings from floor to ceiling,
-    # Inside the room you notice a minotaur sitting down on a bench enjoying the views. He grumbles to himself as you walk in
-    # and pulls a lever sealing the entrance behind you. He stand up, bellows at you and charges."
-# The fight itself
-# After fight text
-    # e.g. "You leave the corpse of the "Monster" behind you as you casually stroll further into the bowels of the crypt."
 
 def fight_scenario
   @monster = new_monster
@@ -29,6 +25,12 @@ def exit_text
   puts "You leave the corpse of the #{@monster.name} behind you as you casually stroll further into the bowels of the crypt."
 end
 
+def new_monster
+  monsters = [Minotaur.new, Skeleton.new, Goblin.new, MutatedRatPerson.new]
+  num = rand(0..3)
+  monsters[num]
+end
+
 def wizard_fight
   @player_armor = World.champion.armor_value
   max_armor = @player_armor + 8
@@ -36,6 +38,7 @@ def wizard_fight
   @shield_count = 0
   until @monster.health < 1 or World.champion.health < 1
     if turn == 'player'
+      @frozen = false
       if @shield_count != 0
         @shield_count -= 1
       else
@@ -124,10 +127,18 @@ def regular_fight
                                        puts champion_miss_text
                                       end}
         actions.choice "Give the #{@monster.name} a 'hug'. Monsters need love too.",
-                       -> {if World.dice.roll_d3 == 1
+                       -> {if World.dice.roll_d4 < 3
                              damage = @monster.do_damage / 2
                              World.champion.lose_health(damage)
-                             puts "The #{@monster.name} does not trust your pure intentions and instead punches you straight in the nuts for #{damage} damage!"
+                             puts "The #{@monster.name} does not trust your 'pure' intentions and instead punches you straight in the nuts for #{damage} damage!"
+                           else
+                             damage = World.champion.do_damage + 5
+                             @monster.lose_health(damage)
+                             puts "You walk up to the #{@monster.name} and give it a hug.
+it sighs as though this one simple act of kindness has just cured all of its troubled thoughts and woes.
+BUT IT WAS A TRICK!
+You HEADBUTT the #{@monster.name}, KICK it in the crotch, and INSULT its mother! Doing #{damage} damage!
+Pascal: ...You lying filthy bastard. Even I'm not that cold."
                            end}
         actions.choice "Drink Potion. Current Health: #{World.champion.health}. Potions Remaining: #{World.champion.potions}", -> {World.champion.use_potion}
       end
@@ -153,11 +164,7 @@ GAME OVER.")
   end
 end
 
-def new_monster
-  monsters = [Minotaur.new, Skeleton.new, Goblin.new]
-  num = rand(0..2)
-  monsters[num]
-end
+# FIGHT TEXT ----------------------------- FIGHT TEXT #
 
 def champion_hit_text(damage)
   text = ["You swing your #{gear_to_s(World.champion.weapon)} at the #{@monster.name} cutting deep into its flesh dealing #{damage} damage!",
@@ -200,5 +207,5 @@ def ice_blast_hit_text(damage)
 end
 
 def ice_blast_miss_text
-  puts ["Your blast of ice side stepped by the #{@monster.name} missing it completely."]
+  puts ["Your blast of ice is side stepped by the #{@monster.name} missing it completely."]
 end

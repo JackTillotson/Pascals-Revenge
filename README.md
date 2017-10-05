@@ -4,7 +4,7 @@ Ruby command line game
 
 Note: Currently the gemfile cannot download. Must do it manually.
 Before you run the game for the first time and after you have ruby installed type:
-######gem install tty-prompt
+###### gem install tty-prompt
 
 
 ## Welcome to Pascal's Revenge!
@@ -14,6 +14,7 @@ This is a text based dungeon crawler game designed to be played in one run.
 You pick a class to start with, your armor, and weapons.
 Then you make your way through the Crypt of the Lich Balanar!
 Hopefully surviving and finding his treasure.
+If you die, which you will, simply run the game as before and try again!
 
 ### PLAYING ON MAC/LINUX?:
 If you have a mac it should already have ruby installed.
@@ -49,3 +50,14 @@ Here are some useful commands for navigating command line in pc.
 ###### cd
 dir displays the files in your current directory
 cd file_name followed by a file name takes you to that directory.
+
+### WANTING TO UPDATE PASCAL'S REVENGE?
+One way to do this is to simply delete the current game files and download the latest zip file from github.
+
+A less messy way is go to the root of the project(Pascals-Revenge), wherever you put it.
+Once you are there type:
+###### git pull
+This should be enough to have updated changes.
+I like to use the free program, Sourcetree, for my github work which is also another option.
+
+If this README is insufficient for getting the game setup, Google your problems!

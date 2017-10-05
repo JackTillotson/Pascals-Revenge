@@ -2,6 +2,11 @@ require_relative 'character'
 require_relative '../world'
 class Wizard < Character
 
+  def initialize(type, name)
+    data = [:intelligence, :constitution, :dexterity, :charisma, :strength, :wisdom]
+    super(type, name, data)
+  end
+
   def weapon_up(weapon, dx, a_num, stat_num)
     set_weapon(weapon)
     set_damage(dx)

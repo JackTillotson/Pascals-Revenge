@@ -1,13 +1,10 @@
 require_relative 'mad_scientist'
+require_relative 'venus_flytrap'
 
 def puzzle_scenario
-  puzzles = [:mad_scientist, :venus_flytrap]
+  puzzles = [MadScientist.new, VenusFlytrap.new]
   num = rand(0..1)
-  send(puzzles[num])
-end
-
-def mad_scientist
-  puzzle = MadScientist.new
+  puzzle = puzzles[num]
   puzzle.intro
   puzzle.action
   puzzle.outro

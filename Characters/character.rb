@@ -1,15 +1,7 @@
 require_relative '../world'
 class Character
 
-  def initialize(type, name)
-    if type == :fighter
-      data = [:strength, :constitution, :dexterity, :intelligence, :charisma, :wisdom]
-    elsif type == :wizard
-      data = [:intelligence, :constitution, :dexterity, :charisma, :strength, :wisdom]
-    elsif type == :rogue
-      data = [:dexterity, :strength, :constitution, :intelligence, :charisma, :wisdom]
-    end
-
+  def initialize(type, name, data)
     @potions = 3
     @name = name
     @_class = type
@@ -77,7 +69,7 @@ class Character
   def use_potion
     if @potions > 0
       @potions -= 1
-      num = gain_health(World.dice.roll_d8)
+      gain_health(num = World.dice.roll_d8)
       if num > 5
         puts "The potion glistens with the tears of angels as it slides smoothly down your throat. You regain #{num} health."
       elsif num > 3

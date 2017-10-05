@@ -1,6 +1,11 @@
 require_relative 'character'
 class Rogue < Character
 
+  def initialize(type, name)
+    data = [:dexterity, :strength, :constitution, :intelligence, :charisma, :wisdom]
+    super(type, name, data)
+  end
+
   def attack
     World.dice.roll_d20 + stat_bonus(:dexterity)
   end

@@ -1,4 +1,5 @@
 require_relative '../../world'
+
 class MadScientist
   def intro
     puts "You enter a stone laboratory full of expensive looking equipment and Tesla coils.
