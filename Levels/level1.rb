@@ -3,6 +3,8 @@ require_relative '../Characters/character'
 require_relative '../Characters/fighter'
 require_relative '../Characters/wizard'
 require_relative '../Characters/rogue'
+require_relative '../Scenarios/Boss Fights/snail_boss'
+require 'timeout'
 puts "You arrive at the border of Dunathal, tired and hungry from your journey.
 You see a small bug floating annoyingly close to you... Almost like it's watching you.\n\n"
 
@@ -203,6 +205,5 @@ You lose 1 health, you are now at #{World.champion.health} health."
   end
 end
 
-puts "The door opens and behind it seems to be more endless crypt...
-#{World.champion.name}: This just looks like more of the same! When will we get to the end!?
-Pascal: The crypt is not done with us just yet... Though we are getting closer, I can feel it."
+puts 'The door begins to slowly swing open...'
+snail_race
