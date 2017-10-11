@@ -3,7 +3,7 @@ require_relative '../world'
 class Minotaur < Monster
 
   def initialize
-    @health = 25
+    @health = 20
   end
 
   def name
@@ -19,7 +19,7 @@ class Minotaur < Monster
   end
 
   def do_damage
-    World.dice.roll_d12 + 2
+    World.dice.roll_d8 + 2
   end
 
   def miss_text

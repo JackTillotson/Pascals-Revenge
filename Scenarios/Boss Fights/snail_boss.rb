@@ -110,8 +110,7 @@ Your snail with riveting speed moves #{@speed} inches and does not seem to be an
                     -> {@speed = World.dice.roll_d6
                     @rage = World.dice.roll_d(2)
                     puts "You yell: Go! Fly like the wind you handsome young mollusc!
-Your snail with blinding speed moves #{@speed} inches and increases #{@rage} anger levels!"
-                    inches += @speed}
+Your snail with blinding speed moves #{@speed} inches and increases #{@rage} anger levels!"}
       cheers.choice 'Cheer like a way too into it sports parent.',
                     -> {@speed = World.dice.roll_d12
                     @rage = World.dice.roll_d(4) + 1
@@ -133,8 +132,11 @@ Suck It moves #{temp_red} inches!"
   end
 
   if inches >= 50
+    World.champion.stats.keys.each do |key|
+      World.champion.raise_stat(key, 2)
+    end
     puts "You win!!!!!!
-Your #{} has been raised to #{}!
+Your stats have been raised by 2!
 
 Pascal: About time this worthless snail did something!
 The snail enrages after hearing Pascal's comment!"
