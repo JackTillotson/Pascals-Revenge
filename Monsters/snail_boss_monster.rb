@@ -3,7 +3,7 @@ require_relative '../world'
 class SnailBossMonster < Monster
 
   def initialize
-    @health = 50
+    @health = 75
   end
 
   def name

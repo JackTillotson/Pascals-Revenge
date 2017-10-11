@@ -1,12 +1,5 @@
 # Pascals-Revenge
 Ruby command line game
-
-
-Note: Currently the gemfile cannot download. Must do it manually.
-Before you run the game for the first time and after you have ruby installed type:
-###### gem install tty-prompt
-
-
 ## Welcome to Pascal's Revenge!
 This is a text based dungeon crawler game designed to be played in one run.
 (Saving may be added in the future if the game becomes larger.)

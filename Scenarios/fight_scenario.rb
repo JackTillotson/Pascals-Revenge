@@ -5,6 +5,7 @@ require_relative '../Monsters/skeleton'
 require_relative '../Monsters/goblin'
 require_relative '../Monsters/mutated_rat_person'
 require_relative '../Characters/character'
+require_relative '../Scenarios/Boss Fights/snail_boss'
 
 def fight_scenario
   @monster = new_monster

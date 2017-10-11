@@ -2,6 +2,9 @@ require_relative '../../world'
 require_relative '../../Characters/character'
 require_relative '../../Monsters/snail_boss_monster'
 require_relative '../../Monsters/monsters'
+require_relative '../fight_scenario'
+require 'timeout'
+require 'colorize'
 
 def snail_race
   puts "\nYou hear a cacophony of shouts, cheers, and insults as you enter the room.
@@ -127,7 +130,7 @@ Your snail with near to light speed moves #{@speed} inches and increases #{@rage
     red += temp_red
     puts "\nSurprise Banana moves #{temp_yellow} inches!
 Booger moves #{temp_green} inches!
-Suck It moves #{temp_red} inches!"
+Suck It moves #{temp_red} inches!\n"
     anger -= 1
   end
 
@@ -143,6 +146,13 @@ The snail enrages after hearing Pascal's comment!"
   elsif anger >= 10
     puts 'You have reached 10 anger! The snail enrages at your excessive cheering!'
   else
+    if yellow >= 50
+      puts 'Surprise Banana Wins!!!'
+    elsif green >= 50
+      puts 'Booger Wins!!!'
+    else
+      puts 'Suck It Wins!!!'
+    end
     puts 'The snail enrages from not coming in 1st!'
   end
 
@@ -152,5 +162,155 @@ end
 
 
 def snail_fight
-  puts 'Snail Fight Test'
+  puts "The snail begins to grow, his shell and body expanding at an alarming rate!
+The monsters in the room begin to scream and scatter.
+Many are crushed beneath the behemoth of a snail that has materialized before you!
+
+You notice some of the monsters trying to leave the room but the door is locked.
+You see the key around the neck of the Zombie Creature who, at the moment,
+is being turned to mush from the acidic slime produced by the giant snail.
+
+The snail then turns his attention towards the group at the door and they all die horribly!
+Their shrieks die away as the last of them passes to the void.
+
+With the rest of the monsters either playing dead or being dead the snail turns its attention towards you!
+
+You are far too brave to play dead and instead confront the giant snail head on!
+
+The snail cackles at you: You insulted me and therefore shall die the slowest!
+Yet because you have shown bravery I shall explain to you how this fight works!
+This isn't Dark Souls okay, it's text based! I have to explain things! Anyway..."
+  World.prompt.select 'Are you ready to hear the rules?' do |choices|
+    choices.choice 'Yes.'
+  end
+
+  puts "Each round you will attack me. This will happen automatically.\n
+Each round I will randomly summon 2 snails of 3 possible colors.
+You will have the option to kill one of those snails each round OR you can do an extra attack against me.
+YOU WILL ONLY HAVE 3 SECONDS TO MAKE THE CHOICE OR YOU WILL DEFAULT TO KILLING NONE.\n
+The colors and their rules are as follows:
+  Green: If there is an odd number of green snails you will take damage.
+  Red: If there is an even number of red snails you will take damage.
+  Yellow: If there is an odd number of yellow snails then the snails switch their damage properties.
+  Meaning, Green snails now do damage if their number is even, and Red do damage if their number is odd.
+Also in case you haven't noticed my aura cancels out magic!\n"
+
+  World.prompt.select 'Ready to die?' do |choices|
+    choices.choice 'You are the one who is going to die!'
+    choices.choice 'Yes!'
+    choices.choice 'No!', -> {puts 'Giant Undead Snail: Too bad!'}
+  end
+
+  green_snails = 0
+  red_snails = 0
+  yellow_snails = 0
+  @monster = SnailBossMonster.new
+
+  until @monster.health <= 0 || World.champion.health <= 0
+    # if green_snails < 0
+    #   green_snails = 0
+    # end
+    # if red_snails < 0
+    #   red_snails = 0
+    # end
+    # if yellow_snails < 0
+    #   yellow_snails = 0
+    # end
+
+    puts "\nBoss Health: #{@monster.health}
+Your Health: #{World.champion.health}\n\n"
+    2.times do
+      num = rand(0..2)
+      if num == 0
+        green_snails += 1
+        puts "The #{@monster.name} has summoned a Green Snail!\n"
+      elsif num == 1
+        red_snails += 1
+        puts "The #{@monster.name} has summoned a Red Snail!\n"
+      elsif num == 2
+        yellow_snails += 1
+        puts "The #{@monster.name} has summoned a Yellow Snail!\n"
+      end
+    end
+    sleep 7
+
+    begin
+      Timeout::timeout(3) {
+        World.prompt.select "\nWhat Will You Do?" do |actions|
+          actions.choice "Kill A Green Snail! Alive: #{green_snails}".green,
+                                     -> {if green_snails == 0
+                                           puts 'There are no Green snails alive!'
+                                         else
+                                           "You kill a green snail! Obliterating it with your #{World.champion.weapon}"
+                                           green_snails -= 1
+                                         end}
+          actions.choice "Kill A Red Snail! Alive: #{red_snails}".red,
+                                        -> {if red_snails == 0
+                                              puts 'There are no Red snails alive!'
+                                            else
+                                              "You kill a red snail! Obliterating it with your #{World.champion.weapon}"
+                                              red_snails -= 1
+                                            end}
+          actions.choice "Kill A Yellow Snail! Alive: #{yellow_snails}".yellow,
+                                       -> {if yellow_snails == 0
+                                             puts 'There are no Yellow snails alive!'
+                                           else
+                                             "You kill a Yellow snail! Obliterating it with your #{World.champion.weapon}"
+                                             yellow_snails -= 1
+                                           end}
+          actions.choice 'Extra Attack!', -> {if World.champion.attack > @monster.armor_value
+                                                damage = World.champion.do_damage
+                                                @monster.lose_health(damage)
+                                                puts champion_hit_text(damage)
+                                              else
+                                                puts champion_miss_text
+                                              end}
+          actions.choice "Drink A Potion. Current Health: #{World.champion.health}. Potions Remaining: #{World.champion.potions}", -> {World.champion.use_potion}
+        end}
+    rescue => e
+      puts e
+      puts "\n\nChoose Faster Next Time!\n"
+    end
+
+    if green_snails % 2 == 1 && yellow_snails % 2 == 0 && green_snails != 0
+      damage = 2
+      puts "\nYou take #{damage} damage from the little green snails!\n"
+      World.champion.lose_health(damage)
+    end
+    if red_snails % 2 == 0 && yellow_snails % 2 == 0 && red_snails != 0
+      damage = 2
+      puts "\nYou take #{damage} damage from the little red snails!\n"
+      World.champion.lose_health(damage)
+    end
+    if green_snails % 2 == 0 && yellow_snails % 2 == 1 && green_snails != 0
+      damage = 2
+      puts "\nYou take #{damage} damage from the little green snails!\n"
+      World.champion.lose_health(damage)
+    end
+    if red_snails % 2 == 1 && yellow_snails % 2 == 1 && red_snails != 0
+      damage = 2
+      puts "\nYou take #{damage} damage from the little red snails!\n"
+      World.champion.lose_health(damage)
+    end
+
+    puts "\nYou make your auto attack!"
+    if World.champion.attack > @monster.armor_value
+      damage = World.champion.do_damage
+      @monster.lose_health(damage)
+      puts champion_hit_text(damage)
+    else
+      puts champion_miss_text
+    end
+
+  end
+
+  if @monster.health <= 0
+    puts 'You have defeated the Giant Undead Snail!'
+  else
+    abort('The Giant Undead Snail oozes his way on top of you!
+Your bones are crushed and your skin begins to melt away!
+GAME OVER.')
+  end
+
 end
+
