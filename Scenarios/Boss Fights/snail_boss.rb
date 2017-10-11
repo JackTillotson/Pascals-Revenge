@@ -18,7 +18,7 @@ Thankfully none of the monsters have noticed you yet."
   World.prompt.select 'What do you do?' do |choices|
     choices.choice 'Try to open the door back up.', -> {puts "You try to push the door back open but it won't budge.
 You slam your shoulder into the door but still it won't budge.
-Finally you take out your #{World.champion.weapon} and start hacking at the door... To no avail!
+Finally you take out your #{gear_to_s(World.champion.weapon)} and start hacking at the door... To no avail!
 \nA couple of monsters turn around, hearing the sounds your escape attempt.
 They cry, 'HUUUUUUMAN!'
 \nThe noise from the monsters dies down as they all turn to stare at you.
@@ -207,15 +207,6 @@ Also in case you haven't noticed my aura cancels out magic!\n"
   @monster = SnailBossMonster.new
 
   until @monster.health <= 0 || World.champion.health <= 0
-    # if green_snails < 0
-    #   green_snails = 0
-    # end
-    # if red_snails < 0
-    #   red_snails = 0
-    # end
-    # if yellow_snails < 0
-    #   yellow_snails = 0
-    # end
 
     puts "\nBoss Health: #{@monster.health}
 Your Health: #{World.champion.health}\n\n"
@@ -232,30 +223,30 @@ Your Health: #{World.champion.health}\n\n"
         puts "The #{@monster.name} has summoned a Yellow Snail!\n"
       end
     end
-    sleep 7
+    sleep 3
 
     begin
-      Timeout::timeout(3) {
+      Timeout::timeout(5) {
         World.prompt.select "\nWhat Will You Do?" do |actions|
           actions.choice "Kill A Green Snail! Alive: #{green_snails}".green,
                                      -> {if green_snails == 0
                                            puts 'There are no Green snails alive!'
                                          else
-                                           "You kill a green snail! Obliterating it with your #{World.champion.weapon}"
+                                           "You kill a green snail! Obliterating it with your #{gear_to_s(World.champion.weapon)}"
                                            green_snails -= 1
                                          end}
           actions.choice "Kill A Red Snail! Alive: #{red_snails}".red,
                                         -> {if red_snails == 0
                                               puts 'There are no Red snails alive!'
                                             else
-                                              "You kill a red snail! Obliterating it with your #{World.champion.weapon}"
+                                              "You kill a red snail! Obliterating it with your #{gear_to_s(World.champion.weapon)}"
                                               red_snails -= 1
                                             end}
           actions.choice "Kill A Yellow Snail! Alive: #{yellow_snails}".yellow,
                                        -> {if yellow_snails == 0
                                              puts 'There are no Yellow snails alive!'
                                            else
-                                             "You kill a Yellow snail! Obliterating it with your #{World.champion.weapon}"
+                                             "You kill a Yellow snail! Obliterating it with your #{gear_to_s(World.champion.weapon)}"
                                              yellow_snails -= 1
                                            end}
           actions.choice 'Extra Attack!', -> {if World.champion.attack > @monster.armor_value
@@ -267,8 +258,7 @@ Your Health: #{World.champion.health}\n\n"
                                               end}
           actions.choice "Drink A Potion. Current Health: #{World.champion.health}. Potions Remaining: #{World.champion.potions}", -> {World.champion.use_potion}
         end}
-    rescue => e
-      puts e
+    rescue
       puts "\n\nChoose Faster Next Time!\n"
     end
 

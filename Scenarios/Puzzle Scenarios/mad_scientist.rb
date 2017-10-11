@@ -27,9 +27,9 @@ Mad Scientist: Hahaha, alright moron! You can go!"}
                        abort('GAME OVER.')}
                      end}
       actions.choice "#{World.champion.name}: 'I'm gonna beat the crap out of you, you pasty old twig!",
-                     -> {puts ("You swing your #{World.champion.weapon} at the Scientist but he quickly takes a swig of a potion.
+                     -> {puts ("You swing your #{gear_to_s(World.champion.weapon)} at the Scientist but he quickly takes a swig of a potion.
 You notice his muscles start to ripple and bulge mid swing.
-He catches your #{World.champion.weapon} in his hand.
+He catches your #{gear_to_s(World.champion.weapon)} in his hand.
 His muscles continue to expand until he looks far beyond the strongest man you've ever seen.
 He takes a step closer to you until his chest is nearly against your face.
 He begins to peck dance.

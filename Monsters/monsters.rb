@@ -3,7 +3,7 @@ require_relative '../world'
 class Monster
 
   def initialize
-    @health = 10
+    @health = 12
   end
 
   def attack
@@ -23,7 +23,7 @@ class Monster
   end
 
   def armor_value
-    10
+    12
   end
 
   def name

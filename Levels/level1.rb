@@ -206,4 +206,20 @@ You lose 1 health, you are now at #{World.champion.health} health."
 end
 
 puts 'The door begins to slowly swing open...'
+
 snail_race
+
+puts "You step around the corpse of the Giant snail and grab the keys from the body of the Zombie Creature.
+Pascal flies down and again lands on your shoulder.
+\nPascal: Hahaha wooo we kicked his ass!
+\nYou shake your head at pascal.
+You walk over the door opposite you came from, climbing over the bodies of the monsters crushed by the snail.
+You insert the key into the lock and twist.
+The key turns in the lock and the door opens.
+You attempt to remove the keys but they seem to be stuck in the door.
+You walk through the threshold once again braving the crypts in search of the treasure.
+Pascal: We are almost there! I can feel it!"
+
+10.times do
+  next_scenario
+end
