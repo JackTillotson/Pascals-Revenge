@@ -38,7 +38,7 @@ class Wizard < Character
   end
 
   def fireball
-    World.dice.roll_d12 + stat_bonus(:intelligence)
+    World.dice.roll_d16 + stat_bonus(:intelligence)
   end
 
   def magic_shield
@@ -46,12 +46,12 @@ class Wizard < Character
   end
 
   def lightning_bolt
-    World.dice.roll_d4 + World.dice.roll_d4 + World.dice.roll_d4 + stat_bonus(:intelligence)
+    World.dice.roll_d4 + World.dice.roll_d4 + World.dice.roll_d4 + World.dice.roll_d4 + stat_bonus(:intelligence)
   end
 
   #Chance to skip monster's turn
   def ice_blast
-    World.dice.roll_d6
+    World.dice.roll_d8
   end
 
 end

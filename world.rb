@@ -23,6 +23,9 @@ class Dice
   def roll_d20
     rand(1..20)
   end
+  def roll_d16
+    rand(1..16)
+  end
   def roll_d12
     rand(1..12)
   end

@@ -1,6 +1,6 @@
 def trap_scenario
-  traps = [:spike_trap, :dart_trap, :mind_flayer_trap]
-  num = rand(0..2)
+  traps = [:spike_trap, :dart_trap, :mind_flayer_trap, :tar_trap]
+  num = rand(0..3)
   send(traps[num])
 end
 
@@ -15,7 +15,7 @@ end
 def spike_action
   World.prompt.select('What do you do?') do |choices|
     choices.choice 'Try to dodge the spikes.', -> {if World.dice.roll_d20 > (World.dice.roll_d20 + World.champion.dex_save)
-                                                     damage = World.dice.roll_d4
+                                                     damage = World.dice.roll_d4 + 1
                                                      puts "The spikes hit you dealing #{damage}!"
                                                      World.champion.lose_health(damage)
                                                      if World.champion.health < 1
@@ -52,7 +52,7 @@ end
 def dart_action
   World.prompt.select('What do you do?') do |choices|
     choices.choice 'Try to avoid the darts.', -> {if World.dice.roll_d20 > (World.dice.roll_d20 + World.champion.dex_save)
-                                                    damage = World.dice.roll_d4
+                                                    damage = World.dice.roll_d4 + 1
                                                     puts "The darts hit you dealing #{damage}!"
                                                     World.champion.lose_health(damage)
                                                     if World.champion.health < 1
@@ -115,3 +115,48 @@ def mind_flayer_outro
   puts 'You exit the mirrored room wondering what horrors await you next.'
 end
 # MIND FLAYER TRAP ------------------- MIND FLAYER TRAP
+
+# TAR TRAP --------------- TAR TRAP
+def tar_trap
+  tar_intro
+  tar_action
+  tar_outro
+end
+
+def tar_action
+  World.prompt.select('What do you do?') do |choices|
+    choices.choice 'Try to run to the exit.', -> {if World.dice.roll_d20 > (World.dice.roll_d20 + World.champion.dex_save)
+                                                     damage = World.dice.roll_d4 + 1
+                                                     puts "You barely escape the mire but not before the poisonous ground deals #{damage} to you!"
+                                                     World.champion.lose_health(damage)
+                                                     if World.champion.health < 1
+                                                       abort('You try and run through the bog but the pain in your sunken limbs is overwhelming!
+You slowly sink further and further into the ground all the while you feel as though your legs are on fire.
+With your last breath your head sinks into the unseen ground.
+Your last thoughts are of pain.
+GAME OVER.')
+                                                     end
+                                                   else
+                                                     puts 'You run through the mire nimbly keeping your feet above the surface!'
+                                                   end}
+  end
+end
+
+def tar_intro
+  puts 'You hear a bubbling sound as you approach a dimly lit gateway.
+It leads into what appears to be a swamp of some kind!
+The trees are drooping and moss covered.
+They looks as if any second they might reach down and grab you.
+You cautiously make your way through, the only light coming from dim lanterns hung on some of the trees.
+The further you progress the louder the bubbling sound becomes.
+After a few minutes you see a gate exiting the forest in the distance, at the same time you notice the lanterns end where you stand.
+You press on through the gloom, the only sounds are the bubbling and a pounding in your eardrums.
+As you take another step you feel your foot begin to sink into the ground, then the other.
+You slowly begin to sink, your feet stinging from the unseen ground.'
+end
+
+def tar_outro
+  puts 'You make it to the other side of the bog, feet covered in a sticky black substance.
+You walk through the gate glad to be out of the frightening forest, and continue on your journey.'
+end
+# TAR TRAP --------------- TAR TRAP

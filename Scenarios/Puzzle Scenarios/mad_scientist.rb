@@ -17,7 +17,7 @@ Go away! Leave me Alone!"}
       actions.choice "That's some tasty looking bleach you have over there!", -> {puts "To prove your point, you run over to the bleach and take a swig.
 It costs you 2 points of health, but the mad scientist just looks at you in revulsion and returns to work."
       World.champion.lose_health(2)}
-      actions.choice "#{World.champion.name}: 'I can fit my whole fist in my mouth!'",
+      actions.choice "I can fit my whole fist in my mouth!",
                      -> {World.prompt.select 'Mad Scientist: Do it then! I dare you!' do |choices|
                        choices.choice 'Attempt to put your fist in your mouth.',
                                       -> {puts "The mad scientist laughs hysterically as he watches you attempt to eat your own fist.
@@ -26,7 +26,7 @@ Mad Scientist: Hahaha, alright moron! You can go!"}
 \nHe stabs you with a syringe and everything goes dark...."
                        abort('GAME OVER.')}
                      end}
-      actions.choice "#{World.champion.name}: 'I'm gonna beat the crap out of you, you pasty old twig!",
+      actions.choice "I'm gonna beat the crap out of you, you pasty old twig!",
                      -> {puts ("You swing your #{gear_to_s(World.champion.weapon)} at the Scientist but he quickly takes a swig of a potion.
 You notice his muscles start to ripple and bulge mid swing.
 He catches your #{gear_to_s(World.champion.weapon)} in his hand.

@@ -4,6 +4,7 @@ require_relative '../Monsters/minotaur'
 require_relative '../Monsters/skeleton'
 require_relative '../Monsters/goblin'
 require_relative '../Monsters/mutated_rat_person'
+require_relative '../Monsters/ugly_zombie_pug'
 require_relative '../Characters/character'
 require_relative '../Scenarios/Boss Fights/snail_boss'
 
@@ -27,8 +28,8 @@ def exit_text
 end
 
 def new_monster
-  monsters = [Minotaur.new, Skeleton.new, Goblin.new, MutatedRatPerson.new]
-  num = rand(0..3)
+  monsters = [Minotaur.new, Skeleton.new, Goblin.new, MutatedRatPerson.new, UglyZombiePug.new]
+  num = rand(0..4)
   monsters[num]
 end
 

@@ -91,7 +91,7 @@ World.prompt.select( "Pascal: Woah wait! What is that you're wearing?") do |outf
     outfit.choice 'Leather Armor', -> {World.champion.armor_up(:leather, 15, 0)}
   elsif World.champion._class == :wizard
     outfit.choice 'Wizard Robes', -> {World.champion.armor_up(:robes, 12, 0, 2)}
-    outfit.choice 'Leather Armor', -> {World.champion.armor_up(:leather, 15, 0, 0)}
+    outfit.choice 'Leather Armor', -> {World.champion.armor_up(:leather, 14, 0, 0)}
     outfit.choice 'My Birthday Suit', -> {World.champion.armor_up(:birthday_suit, 9, 0, 5)}
   elsif World.champion._class == :rogue
     outfit.choice 'Extremely Tight Revealing Leather Armor', -> {World.champion.armor_up(:extremely_tight_leather, 15, 1)}
@@ -218,7 +218,11 @@ You insert the key into the lock and twist.
 The key turns in the lock and the door opens.
 You attempt to remove the keys but they seem to be stuck in the door.
 You walk through the threshold once again braving the crypts in search of the treasure.
-Pascal: We are almost there! I can feel it!"
+Pascal: We are almost there! I can feel it!\n\n"
+
+World.prompt.select 'Are you ready to move on?' do |choices|
+  choices.choice 'Yes.'
+end
 
 10.times do
   next_scenario
