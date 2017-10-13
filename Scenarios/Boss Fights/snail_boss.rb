@@ -187,7 +187,7 @@ This isn't Dark Souls okay, it's text based! I have to explain things! Anyway...
   puts "Each round you will attack me. This will happen automatically.\n
 Each round I will randomly summon 2 snails of 3 possible colors.
 You will have the option to kill one of those snails each round OR you can do an extra attack against me.
-YOU WILL ONLY HAVE 3 SECONDS TO MAKE THE CHOICE OR YOU WILL DEFAULT TO KILLING NONE.\n
+YOU WILL ONLY HAVE 5 SECONDS TO MAKE THE CHOICE OR YOU WILL DEFAULT TO KILLING NONE.\n
 The colors and their rules are as follows:
   Green: If there is an odd number of green snails you will take damage.
   Red: If there is an even number of red snails you will take damage.

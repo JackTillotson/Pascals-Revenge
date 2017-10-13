@@ -24,7 +24,7 @@ But enough of that! What's your name? Not that it really matters... They never l
 Oh sorry about that! Just kidding again! I hear this place is pretty safe!"
 name = World.prompt.ask('What is your name adventurer?', required: true)
 
-puts "\n\nPascal: Well nice to meet you Mr. #{name}! Hey look at that I used your name! For the first and last time...\n"
+puts "\n\nPascal: Well nice to meet you #{name}! Hey look at that I used your name! For the first and last time...\n"
 
 _class = World.prompt.select('What class will you be dying as today?') do |classes|
   classes.choice 'Fighter', :fighter
@@ -132,7 +132,7 @@ World.prompt.select 'What do you do?' do |choices|
   choices.choice 'Continue.'
 end
 
-"You enter a small room lined with lichen and small plants growing in the cracks of the old stone.
+puts "\nYou enter a small room lined with lichen and small plants growing in the cracks of the old stone.
 On the floor there is a brown leather pack covered in cobwebs.
 Pascal flies down and takes a peek inside.
 Pascal: Oh goody! Health potions! Take these with you to aid you in the crypts.
@@ -157,7 +157,7 @@ puts "\n\nSTAGE 1 COMPLETE\n\n"
 
 puts "Pascal: Well done #{World.champion.name}! Well done! You have made it further than any before you!
 I can almost feel the power flowing through me once again! Hahaha!
-#{World.champion.name}: What are you talking about\n?
+#{World.champion.name}: What are you talking about?\n
 Pascal: Oh nothing! I just meant power as in uhhhh treasure ya know! Like how we will be rich after this!\n"
 World.prompt.select('How do you respond?') do |choices|
   choices.choice "Yeah right! I'm not sharing any treasure with you!", -> {puts "Pascal: After all we've been through!? What a jerk..."}
