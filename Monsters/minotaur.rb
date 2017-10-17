@@ -11,7 +11,7 @@ class Minotaur < Monster
   end
 
   def armor_value
-    17
+    16
   end
 
   def attack
