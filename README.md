@@ -9,6 +9,11 @@ Then you make your way through the Crypt of the Lich Balanar!
 Hopefully surviving and finding his treasure.
 If you die, which you will, simply run the game as before and try again!
 
+### PLAY ONLINE!
+Thanks to Google Cloud Services and GoTTY you can play without the need to download.
+Simply click the link to play 
+##### http://35.199.180.217:8080/
+
 ### PLAYING ON MAC/LINUX?:
 If you have a mac it should already have ruby installed.
 Download the zip of this game and extract it.
